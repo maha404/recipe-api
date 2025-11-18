@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using recipe_api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -23,25 +24,13 @@ if (app.Environment.IsDevelopment())
     app.UseOpenApi();
     app.UseSwaggerUi(config =>
     {
-        config.DocumentTitle = "TodoAPI";
+        config.DocumentTitle = "RecipieAPI";
         config.Path = "/swagger";
         config.DocumentPath = "/swagger/{documentName}/swagger.json";
         config.DocExpansion = "list";
     });
 }
 
-app.MapGet("/getRecipie", async (RecipieDb db) =>
-{
- await db.Recipie.ToListAsync();
-}).WithTags("Recipie");
-    
-
-app.MapPost("/addRecipie", async (Recipie recipie, RecipieDb db) =>
-{
-    db.Recipie.Add(recipie);
-    await db.SaveChangesAsync();
-
-    return Results.Created($"/todoitems/{recipie.Id}", recipie);
-}).WithTags("Recipie");
+app.MapRecipieEndpoints();
 
 app.Run();
