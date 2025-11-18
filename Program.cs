@@ -11,7 +11,7 @@ builder.Services.AddOpenApiDocument(config =>
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<RecipeDb>(options =>
+builder.Services.AddDbContext<RecipieDb>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
@@ -30,16 +30,18 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.MapGet("/getRecepies", async (RecipeDb db) =>
-    await db.Recipes.ToListAsync());
-
-
-app.MapPost("/addRecepie", async (Recipe recipe, RecipeDb db) =>
+app.MapGet("/getRecipie", async (RecipieDb db) =>
 {
-    db.Recipes.Add(recipe);
+ await db.Recipie.ToListAsync();
+}).WithTags("Recipie");
+    
+
+app.MapPost("/addRecipie", async (Recipie recipie, RecipieDb db) =>
+{
+    db.Recipie.Add(recipie);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/todoitems/{recipe.Id}", recipe);
-});
+    return Results.Created($"/todoitems/{recipie.Id}", recipie);
+}).WithTags("Recipie");
 
 app.Run();

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace recipe_api.Migrations
 {
-    [DbContext(typeof(RecipeDb))]
+    [DbContext(typeof(RecipieDb))]
     [Migration("20251012182128_init")]
     partial class init
     {

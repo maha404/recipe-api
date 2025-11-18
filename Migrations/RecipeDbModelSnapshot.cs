@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace recipe_api.Migrations
 {
-    [DbContext(typeof(RecipeDb))]
+    [DbContext(typeof(RecipieDb))]
     partial class RecipeDbModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
