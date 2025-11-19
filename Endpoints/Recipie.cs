@@ -8,7 +8,8 @@ namespace recipe_api.Endpoints
         {
             app.MapGet("/recipie", async (RecipieDb db) =>
             {
-                await db.Recipie.ToListAsync();
+                var recipie = await db.Recipie.ToListAsync();
+                return Results.Ok(recipie);
             }).WithName("GetRecipie").WithTags("Recipie");
 
             app.MapGet("/recipie/{id}", async (int id, RecipieDb db) =>
@@ -31,7 +32,7 @@ namespace recipe_api.Endpoints
                 {
                     db.Recipie.Remove(recipie);
                     await db.SaveChangesAsync();
-                    return Results.NoContent();
+                    return Results.Ok($"Order {id} deleted");
                 }
 
                 return Results.NotFound();
