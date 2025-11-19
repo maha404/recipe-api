@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 
-public class RecipeDb : DbContext
+public class RecipieDb : DbContext
 {
-    public RecipeDb(DbContextOptions<RecipeDb> options)
+    public RecipieDb(DbContextOptions<RecipieDb> options)
         : base(options)
     {
     }
 
-    public DbSet<Recipe> Recipes => Set<Recipe>();
+    public DbSet<Recipie> Recipie => Set<Recipie>();
 }
