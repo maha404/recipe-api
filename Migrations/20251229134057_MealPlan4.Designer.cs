@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace recipe_api.Migrations
 {
     [DbContext(typeof(RecipieDb))]
-    partial class RecipeDbModelSnapshot : ModelSnapshot
+    [Migration("20251229134057_MealPlan4")]
+    partial class MealPlan4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace recipe_api.Migrations
                     b.PrimitiveCollection<string>("Ingredients")
                         .HasColumnType("longtext");
 
-                    b.PrimitiveCollection<string>("Instructions")
+                    b.Property<string>("Instructions")
                         .HasColumnType("longtext");
 
                     b.Property<string>("PortionSize")

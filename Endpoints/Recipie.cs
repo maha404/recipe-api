@@ -32,7 +32,7 @@ namespace recipe_api.Endpoints
                 {
                     db.Recipie.Remove(recipie);
                     await db.SaveChangesAsync();
-                    return Results.Ok($"Order {id} deleted");
+                    return Results.Ok($"Recipie {id} deleted");
                 }
 
                 return Results.NotFound();

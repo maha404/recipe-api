@@ -7,5 +7,6 @@ public class Recipie
     public string? PreparationTime { get; set; }
     public string? CookingTime { get; set; }
     public List<string>? Ingredients { get; set; }
-    public string? Instructions { get; set; }
+    public List<string>? Instructions { get; set; }
+    public ICollection<MealPlan> MealPlans { get; set; } = new List<MealPlan>();
 }

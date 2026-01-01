@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using recipe_api.Endpoints;
 
@@ -6,8 +7,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiDocument(config =>
 {
-    config.DocumentName = "TodoAPI";
-    config.Title = "TodoAPI v1";
+    config.DocumentName = "RecipieAPI";
+    config.Title = "RecipieAPI v1";
     config.Version = "v1";
 });
 
@@ -45,5 +46,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapRecipieEndpoints();
+app.MapMealPlanEndpoints();
 
 app.Run();
