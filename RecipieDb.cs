@@ -5,6 +5,7 @@ public class RecipieDb : DbContext
 
     public DbSet<Recipie> Recipes => Set<Recipie>();
     public DbSet<MealPlan> MealPlans => Set<MealPlan>();
+    public DbSet<OnlineRecipie> OnlineRecipie => Set<OnlineRecipie>();
 
     public RecipieDb(DbContextOptions<RecipieDb> options)
         : base(options)
@@ -14,9 +15,10 @@ public class RecipieDb : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<MealPlan>()
-            .HasOne(mp => mp.Recipie)
-            .WithMany(r => r.MealPlans)
-            .HasForeignKey(mp => mp.RecipieId);
+        .HasOne(m => m.OnlineRecipie)
+        .WithMany(o => o.MealPlans)
+        .HasForeignKey(m => m.OnlineRecipieId)
+        .OnDelete(DeleteBehavior.SetNull);
     }
 
     public DbSet<Recipie> Recipie => Set<Recipie>();

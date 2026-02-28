@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace recipe_api.Migrations
 {
     [DbContext(typeof(RecipieDb))]
-    partial class RecipeDbModelSnapshot : ModelSnapshot
+    [Migration("20260228195124_AddOnlineRecipie")]
+    partial class AddOnlineRecipie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,15 +38,10 @@ namespace recipe_api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("OnlineRecipieId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RecipieId")
+                    b.Property<int>("RecipieId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OnlineRecipieId");
 
                     b.HasIndex("RecipieId");
 
@@ -107,23 +105,13 @@ namespace recipe_api.Migrations
 
             modelBuilder.Entity("MealPlan", b =>
                 {
-                    b.HasOne("OnlineRecipie", "OnlineRecipie")
-                        .WithMany("MealPlans")
-                        .HasForeignKey("OnlineRecipieId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("Recipie", "Recipie")
                         .WithMany("MealPlans")
-                        .HasForeignKey("RecipieId");
-
-                    b.Navigation("OnlineRecipie");
+                        .HasForeignKey("RecipieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Recipie");
-                });
-
-            modelBuilder.Entity("OnlineRecipie", b =>
-                {
-                    b.Navigation("MealPlans");
                 });
 
             modelBuilder.Entity("Recipie", b =>

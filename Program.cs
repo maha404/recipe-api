@@ -47,5 +47,6 @@ if (app.Environment.IsDevelopment())
 
 app.MapRecipieEndpoints();
 app.MapMealPlanEndpoints();
+app.MapOnlineRecipieEndpoints();
 
 app.Run();
